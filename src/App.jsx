@@ -10,12 +10,16 @@ import Home from "./pages/home/Home";
 import Details from "./pages/details/Details";
 import Explore from "./pages/explore/Explore";
 import SearchResults from "./pages/searchResults/SearchResults";
-import pageNotFound from "./pages/404/pageNotFound";
+// import pageNotFound from "./pages/404/pageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
   // console.log(url);
+
+  useEffect(() => {
+    fetchApiConfig();
+  }, []);
   const fetchApiConfig = async () => {
     const response = await fetchDataFromApi("/configuration");
 
@@ -27,12 +31,10 @@ const App = () => {
 
     dispatch(getApiConfiguration(url));
   };
-  useEffect(() => {
-    fetchApiConfig();
-  }, []);
+
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:mediaType/:id" element={<Details />} />
@@ -40,7 +42,7 @@ const App = () => {
         <Route path="/explore/:mediaType" element={<Explore />} />
         <Route path="*" element={<pageNotFound />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 };

@@ -28,7 +28,7 @@ const HeroBanner = () => {
       console.log(query);
     }
   };
-  9609923984;
+  // 9609923984;
   return (
     <div className="heroBanner">
       {!loading && (
